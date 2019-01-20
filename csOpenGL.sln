@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rtUtility", "rtUtility\rtUtility.csproj", "{268F27DC-3165-4553-B9C0-CC79867FB656}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rtOpenTK", "rtOpenTK\rtOpenTK.csproj", "{3EF4215B-70A1-416A-B9DB-8F159310FAC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{268F27DC-3165-4553-B9C0-CC79867FB656}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{268F27DC-3165-4553-B9C0-CC79867FB656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{268F27DC-3165-4553-B9C0-CC79867FB656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EF4215B-70A1-416A-B9DB-8F159310FAC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF4215B-70A1-416A-B9DB-8F159310FAC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF4215B-70A1-416A-B9DB-8F159310FAC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF4215B-70A1-416A-B9DB-8F159310FAC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
