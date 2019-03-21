@@ -6,41 +6,19 @@ namespace rtOpenTK.rtGLResourceObject
 
     public class TGLBufferObject : TGLResourceObject
     {
-        public TGLBufferObject(int aGenCount = 1)
+        public TGLBufferObject()
         {
-            p_BufferObjects = new uint[aGenCount];
             return;
         }
 
-        public void Bind(TrtGLControl aGL, OpenGL.BufferTarget aTarget)
-        {
-            Bind(aGL, aTarget, 0);
-            return;
-        }
-
-        public void Bind(TrtGLControl aGL, OpenGL.BufferTarget aTarget, int aBufferIndex)
-        {
-            OpenGL.GL.BindBuffer(aTarget, p_BufferObjects[aBufferIndex]);
-            return;
-        }
-
-        public void Bind(TrtGLControl aGL, OpenGL4.BufferTarget aTarget)
-        {
-            Bind(aGL, aTarget, 0);
-            return;
-        }
-
-        public void Bind(TrtGLControl aGL, OpenGL4.BufferTarget aTarget, int aBufferIndex)
-        {
-            OpenGL4.GL.BindBuffer(aTarget, p_BufferObjects[aBufferIndex]);
-            return;
-        }
+        public int ID
+        { get; private set; }
 
         protected override void DoCreateGLResource(TrtGLControl aGL)
         {
             base.DoCreateGLResource(aGL);
 
-            OpenGL4.GL.GenBuffers(p_BufferObjects.Length, p_BufferObjects);
+            ID = OpenGL4.GL.GenBuffer();
             return;
         }
 
@@ -48,13 +26,11 @@ namespace rtOpenTK.rtGLResourceObject
         {
             base.DoDisposeGLResource(aGL);
 
-            OpenGL4.GL.DeleteBuffers(p_BufferObjects.Length, p_BufferObjects);
+            OpenGL4.GL.DeleteBuffer(ID);
             return;
         }
 
         public override bool IsResourceReady
-        { get { return p_BufferObjects[0] != 0; } }
-
-        private uint[] p_BufferObjects = null;
+        { get { return ID != 0; } }
     }
 }

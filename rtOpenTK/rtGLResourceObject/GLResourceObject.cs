@@ -36,11 +36,11 @@ namespace rtOpenTK.rtGLResourceObject
 
         protected override void Dispose(bool aDisposing)
         {
-            //if (TrtGLControl.CurrentControl != null)
-            //    DisposeGLResource(TrtGLControl.CurrentControl);
-            //else
-            //    TrtGLControl.ResourceManager.EnqueueDisposeResourceObject(this);
             base.Dispose(aDisposing);
+            if (aDisposing) {
+                TrtGLControl.ResourceManager.EnqueueDisposeResourceObject(this);
+            }
+
             return;
         }
 

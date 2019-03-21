@@ -24,14 +24,14 @@ namespace GLDelaunayTriangulation
             GL.PushClientAttrib(ClientAttribMask.ClientAllAttribBits);
             try {
                 GL.EnableClientState(ArrayCap.VertexArray);
-                p_Vertices.Bind(aGL, BufferTarget.ArrayBuffer);
+                GL.BindBuffer(BufferTarget.ArrayBuffer, p_Vertices.ID);
                 GL.VertexPointer(2, VertexPointerType.Float, sizeof(float) * 2, 0);
 
-                p_Indices.Bind(aGL, BufferTarget.ElementArrayBuffer);
+                GL.BindBuffer(BufferTarget.ElementArrayBuffer, p_Indices.ID);
                 GL.DrawElements(PrimitiveType.Triangles, p_IndexCount, DrawElementsType.UnsignedInt, 0);
 
                 if (aRenderOuter) {
-                    p_Indices.Bind(aGL, BufferTarget.ElementArrayBuffer, 1);
+                    GL.BindBuffer(BufferTarget.ElementArrayBuffer, p_OuterIndices.ID);
                     GL.DrawElements(PrimitiveType.Triangles, p_OuterIndexCount, DrawElementsType.UnsignedInt, 0);
                 }
 
@@ -62,7 +62,7 @@ namespace GLDelaunayTriangulation
                 vertices[(i * 2) + 0] = (float)(src.Vertices[i].Position.X);
                 vertices[(i * 2) + 1] = (float)(src.Vertices[i].Position.Y);
             }
-            p_Vertices.Bind(aGL, BufferTarget.ArrayBuffer);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, p_Vertices.ID);
             GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 
@@ -72,7 +72,7 @@ namespace GLDelaunayTriangulation
                 for (int j = 0; j < 3; ++j)
                     indices[(i * 3) + j] = (uint)(src.Triangles[i].Vertices[j].Index);
             }
-            p_Indices.Bind(aGL, BufferTarget.ElementArrayBuffer);
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, p_Indices.ID);
             GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
 
@@ -83,7 +83,7 @@ namespace GLDelaunayTriangulation
                 for (int j = 0; j < 3; ++j)
                     indices[(i * 3) + j] = (uint)(src.OuterTriangles[i].Vertices[j].Index);
             }
-            p_Indices.Bind(aGL, BufferTarget.ElementArrayBuffer, 1);
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, p_OuterIndices.ID);
             GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
 
@@ -94,8 +94,9 @@ namespace GLDelaunayTriangulation
             return;
         }
 
-        private TGLBufferObject p_Vertices = new TGLBufferObject(1);
-        private TGLBufferObject p_Indices = new TGLBufferObject(2);
+        private TGLBufferObject p_Vertices = new TGLBufferObject();
+        private TGLBufferObject p_Indices = new TGLBufferObject();
+        private TGLBufferObject p_OuterIndices = new TGLBufferObject();
         private int p_VertexCount = 0;
         private int p_IndexCount = 0;
         private int p_OuterIndexCount = 0;
