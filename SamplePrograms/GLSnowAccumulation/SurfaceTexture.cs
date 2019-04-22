@@ -34,7 +34,7 @@ namespace GLSnowAccumulation
             base.DoCreateGLResource(aGL);
 
             try {
-                Bitmap bmp = new Bitmap(".\\image\\Surface.jpg");
+                Bitmap bmp = new Bitmap("..\\resource\\image\\Surface.jpg");
 
                 PotWidth  = (int)((uint)bmp.Width).UpToPowerOfTwo();
                 PotHeight = (int)((uint)bmp.Height).UpToPowerOfTwo();

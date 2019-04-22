@@ -18,7 +18,7 @@ namespace GLSnowAccumulation
 
             p_Material.Ambient.R = 0.0;
             p_Material.Ambient.G = 0.0;
-            p_Material.Ambient.B = 0.1;
+            p_Material.Ambient.B = 0.2;
             p_Material.Diffuse.R = 1.0;
             p_Material.Diffuse.G = 1.0;
             p_Material.Diffuse.B = 1.0;
@@ -136,9 +136,13 @@ namespace GLSnowAccumulation
                 1.0f, 1.0f
             };
 
+            p_Vertices.CreateGLResource(aGL);
+
             GL.BindBuffer(BufferTarget.ArrayBuffer, p_Vertices.ID);
             GL.BufferData(BufferTarget.ArrayBuffer, sizeof(float) * vertices.Length, vertices, BufferUsageHint.StaticDraw);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+
+            p_SamplerObject.CreateGLResource(aGL);
 
             GL.SamplerParameterI(p_SamplerObject.ID, SamplerParameterName.TextureWrapS, new int[] { (int)All.ClampToEdge });
             GL.SamplerParameterI(p_SamplerObject.ID, SamplerParameterName.TextureWrapT, new int[] { (int)All.ClampToEdge });
@@ -167,13 +171,20 @@ namespace GLSnowAccumulation
 
         private void InitializeShaders(TrtGLControl aGL, object aObject)
         {
+            p_VertexShader.CreateGLResource(aGL);
+            p_FragmentShader.CreateGLResource(aGL);
+            p_TessControlShader.CreateGLResource(aGL);
+            p_TessEvacuateShader.CreateGLResource(aGL);
+
             bool compiled = true;
-            compiled &= p_VertexShader.Compile(aGL, TGLShaderTextSource.CreateFileSource(".\\shader\\Vertex.glsl"));
-            compiled &= p_FragmentShader.Compile(aGL, TGLShaderTextSource.CreateFileSource(".\\shader\\Fragment.glsl"));
-            compiled &= p_TessControlShader.Compile(aGL, TGLShaderTextSource.CreateFileSource(".\\shader\\TessControl.glsl"));
-            compiled &= p_TessEvacuateShader.Compile(aGL, TGLShaderTextSource.CreateFileSource(".\\shader\\TessEvacuate.glsl"));
+            compiled &= p_VertexShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\Vertex.glsl"));
+            compiled &= p_FragmentShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\Fragment.glsl"));
+            compiled &= p_TessControlShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\TessControl.glsl"));
+            compiled &= p_TessEvacuateShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\TessEvacuate.glsl"));
 
             if (compiled) {
+                p_RenderShaderProgram.CreateGLResource(aGL);
+
                 p_RenderShaderProgram.AttachShader(aGL, p_VertexShader);
                 p_RenderShaderProgram.AttachShader(aGL, p_FragmentShader);
                 p_RenderShaderProgram.AttachShader(aGL, p_TessControlShader);

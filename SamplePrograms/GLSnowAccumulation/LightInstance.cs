@@ -84,6 +84,8 @@ namespace GLSnowAccumulation
 
         private void InitializeBuffers(TrtGLControl aGL, object aObject)
         {
+            p_Buffer.CreateGLResource(aGL);
+
             GL.BindBuffer(BufferTarget.ShaderStorageBuffer, p_Buffer.ID);
             try {
                 GL.BufferData(BufferTarget.ShaderStorageBuffer, con_DataSize, (IntPtr)null, BufferUsageHint.StaticDraw);

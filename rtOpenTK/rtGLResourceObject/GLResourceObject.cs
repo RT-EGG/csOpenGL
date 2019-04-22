@@ -16,21 +16,15 @@ namespace rtOpenTK.rtGLResourceObject
             return;
         }
 
-        internal void CreateGLResource(TrtGLControl aGL)
+        public void CreateGLResource(TrtGLControl aGL)
         {
-            CreateGLResourceNow(aGL);
+            DoCreateGLResource(aGL);
             return;
         }
 
         internal void DisposeGLResource(TrtGLControl aGL)
         {
             DoDisposeGLResource(aGL);
-            return;
-        }
-
-        public void CreateGLResourceNow(TrtGLControl aGL)
-        {
-            DoCreateGLResource(aGL);
             return;
         }
 

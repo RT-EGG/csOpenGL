@@ -79,6 +79,8 @@ namespace GLSnowAccumulation
 
         private void InitializeBuffers(TrtGLControl aGL, object aObject)
         {
+            p_Buffer.CreateGLResource(aGL);
+
             GL.BindBuffer(BufferTarget.UniformBuffer, p_Buffer.ID);
             try {
                 GL.BufferData(BufferTarget.UniformBuffer, sizeof(float) * ((4 * 4) + 1), (IntPtr)null, BufferUsageHint.StaticDraw);

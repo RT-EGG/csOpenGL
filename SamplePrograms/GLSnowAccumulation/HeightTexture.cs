@@ -43,29 +43,8 @@ namespace GLSnowAccumulation
             } finally {
                 GL.UseProgram(0);
             }
-            
+
             return;
-        }
-
-        public List<string> GenerateShaderSource()
-        {
-            List<string> result = new List<string>();
-
-            result.Add("#version 430");
-            result.Add("");
-            result.Add("layout (binding = 0, ) writeonly uniform image2D inDstTexture;");
-            result.Add("layout (location = 0) uniform int inTextureWidth;");
-            result.Add("layout (location = 0) uniform int inTextureWidth;");
-            result.Add("");
-            result.Add("layout (localsize_x = 32, local_size_y = 32) in;");
-            result.Add("");
-            result.Add("void main(void)");
-            result.Add("{");
-            result.Add("");
-            result.Add("    return;");
-            result.Add("}");
-
-            return result;
         }
 
         public int Width
@@ -81,11 +60,10 @@ namespace GLSnowAccumulation
         {
             base.DoCreateGLResource(aGL);
 
-            p_Shader = new TGLShader.TGLComputeShader();
-            p_ShaderProgram = new TGLShaderProgram();
+            p_Shader.CreateGLResource(aGL);
+            p_ShaderProgram.CreateGLResource(aGL);
 
-            p_Shader.Compile(aGL, TGLShaderTextSource.CreateFileSource(".\\shader\\HeightInitialization.glsl"));
-            //p_Shader.Compile(aGL, TGLShaderTextSource.CreateTextSource(GenerateShaderSource()));
+            p_Shader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\HeightInitialization.glsl"));
             p_ShaderProgram.AttachShader(aGL, p_Shader);
             p_ShaderProgram.Link(aGL);
 
@@ -128,7 +106,7 @@ namespace GLSnowAccumulation
             return;
         }
 
-        private TGLShader p_Shader = null;
-        private TGLShaderProgram p_ShaderProgram = null;
+        private TGLShader p_Shader = new TGLShader.TGLComputeShader();
+        private TGLShaderProgram p_ShaderProgram = new TGLShaderProgram();
     }
 }

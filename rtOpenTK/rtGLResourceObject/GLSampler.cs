@@ -11,7 +11,7 @@ namespace rtOpenTK.rtGLResourceObject
         }
 
         public int ID
-        { get; private set; }
+        { get; private set; } = 0;
 
         public override bool IsResourceReady
         { get { return ID != 0; } }

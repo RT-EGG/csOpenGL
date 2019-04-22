@@ -56,7 +56,7 @@ namespace rtOpenTK.rtGLResourceObject
         { get; }
 
         public int ID
-        { get; private set; }
+        { get; private set; } = 0;
 
         public bool Compiled
         { get { return p_CompileState != 0; } }
