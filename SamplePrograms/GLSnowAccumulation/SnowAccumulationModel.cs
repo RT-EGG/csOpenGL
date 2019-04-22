@@ -33,7 +33,7 @@ namespace GLSnowAccumulation
         { get; set; } = 0.0f;
 
         public float MaxHeight
-        { get; set; } = 1.0f;
+        { get; set; } = 0.2f;
 
         public void RandomizeHeight()
         {
@@ -121,11 +121,13 @@ namespace GLSnowAccumulation
 
         private void InitializeBuffers(TrtGLControl aGL, object aObject)
         {
+            const float con_MeshSize = 2.0f;
+            const float con_MeshHalfSize = con_MeshSize * 0.5f;
             float[] vertices = new float[(4 * 3) + (4 * 3) + (4 * 2)] {
-                -0.5f, +0.5f, 0.0f,
-                -0.5f, -0.5f, 0.0f,                
-                +0.5f, -0.5f, 0.0f,
-                +0.5f, +0.5f, 0.0f,
+                -con_MeshHalfSize, +con_MeshHalfSize, 0.0f,
+                -con_MeshHalfSize, -con_MeshHalfSize, 0.0f,                
+                +con_MeshHalfSize, -con_MeshHalfSize, 0.0f,
+                +con_MeshHalfSize, +con_MeshHalfSize, 0.0f,
                 0.0f, 0.0f, 1.0f,
                 0.0f, 0.0f, 1.0f,
                 0.0f, 0.0f, 1.0f,

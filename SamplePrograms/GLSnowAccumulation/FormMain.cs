@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// System
+using System;
 using System.Windows.Forms;
+// OpenTK
 using OpenTK.Graphics.OpenGL;
+// rtOpenTK
 using rtOpenTK;
 using rtOpenTK.rtGLUtility.rtGLCameraController;
+// rtUtility
 using rtUtility.rtMath;
 
 namespace GLSnowAccumulation
@@ -19,9 +16,6 @@ namespace GLSnowAccumulation
         public FormMain()
         {
             InitializeComponent();
-
-            udMinHeight.Value = (decimal)p_SnowAccumulationModel.MinHeight;
-            udMaxHeight.Value = (decimal)p_SnowAccumulationModel.MaxHeight;
 
             return;
         }
@@ -99,20 +93,6 @@ namespace GLSnowAccumulation
                     OpenGL.Invalidate();
                     break;
             }
-            return;
-        }
-
-        private void UdMinHeight_ValueChanged(object sender, EventArgs e)
-        {
-            p_SnowAccumulationModel.MinHeight = (float)udMinHeight.Value;
-            OpenGL.Invalidate();
-            return;
-        }
-
-        private void UdMaxHeight_ValueChanged(object sender, EventArgs e)
-        {
-            p_SnowAccumulationModel.MaxHeight = (float)udMaxHeight.Value;
-            OpenGL.Invalidate();
             return;
         }
     }
