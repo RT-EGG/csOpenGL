@@ -102,6 +102,14 @@
     <Compile Include="rtGLResourceObject\GLBufferObject.cs" />
     <Compile Include="rtGLResourceObject\GLResourceManager.cs" />
     <Compile Include="rtGLResourceObject\GLResourceObject.cs" />
+    <Compile Include="rtGLResourceObject\GLSampler.cs" />
+    <Compile Include="rtGLResourceObject\GLShader.cs" />
+    <Compile Include="rtGLResourceObject\GLShaderBinarySource.cs" />
+    <Compile Include="rtGLResourceObject\GLShaderProgram.cs" />
+    <Compile Include="rtGLResourceObject\GLShaderSource.cs" />
+    <Compile Include="rtGLResourceObject\GLShaderTextSource.cs" />
+    <Compile Include="rtGLUtility\rtGLCameraController\GLCameraController.cs" />
+    <Compile Include="rtGLUtility\rtGLCameraController\GLOrbitCameraController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\rtUtility\rtUtility.csproj">
@@ -118,5 +126,6 @@
       <DependentUpon>rtGLControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -89,8 +89,6 @@ namespace rtUtility.rtMath
 
         public bool Equals(IROVector aOther)
         {
-            if (aOther is TVector)
-                return Equals(aOther as TVector);
             Debug.Assert(this.Dimension == aOther.Dimension);
             for (int i = 0; i < this.Dimension; ++i) {
                 if (!this[i].AlmostEqual(aOther[i]))

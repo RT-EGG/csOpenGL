@@ -1,24 +1,26 @@
-﻿
+﻿// OpenTK
+using OpenTK.Graphics.OpenGL4;
+
 namespace rtOpenTK.rtGLResourceObject
 {
-    using OpenGL = OpenTK.Graphics.OpenGL;
-    using OpenGL4 = OpenTK.Graphics.OpenGL4;
-
-    public class TGLBufferObject : TGLResourceObject
+    public class TGLSampler : TGLResourceObject
     {
-        public TGLBufferObject()
+        public TGLSampler()
         {
             return;
         }
 
         public int ID
-        { get; private set; } = 0;
+        { get; private set; }
+
+        public override bool IsResourceReady
+        { get { return ID != 0; } }
 
         protected override void DoCreateGLResource(TrtGLControl aGL)
         {
             base.DoCreateGLResource(aGL);
 
-            ID = OpenGL4.GL.GenBuffer();
+            ID = GL.GenSampler();
             return;
         }
 
@@ -26,11 +28,8 @@ namespace rtOpenTK.rtGLResourceObject
         {
             base.DoDisposeGLResource(aGL);
 
-            OpenGL4.GL.DeleteBuffer(ID);
+            GL.DeleteSampler(ID);
             return;
         }
-
-        public override bool IsResourceReady
-        { get { return ID != 0; } }
     }
 }

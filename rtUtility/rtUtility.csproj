@@ -77,10 +77,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\EnumArray.cs" />
     <Compile Include="DisposableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rtMath\AABB2D.cs" />
     <Compile Include="rtMath\Circle2D.cs" />
+    <Compile Include="rtMath\ColorRGB.cs" />
+    <Compile Include="rtMath\ColorRGBA.cs" />
     <Compile Include="rtMath\EulerAngle.cs" />
     <Compile Include="rtMath\LineSegment2D.cs" />
     <Compile Include="rtMath\MathExtensions.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="rtMath\Matrix33.cs" />
     <Compile Include="rtMath\Matrix44.cs" />
     <Compile Include="rtMath\Quaternion.cs" />
+    <Compile Include="rtMath\SphericalCoordinate.cs" />
     <Compile Include="rtMath\SquareMatrix.cs" />
     <Compile Include="rtMath\Triangle2D.cs" />
     <Compile Include="rtMath\Vector.cs" />
