@@ -20,7 +20,8 @@ namespace rtOpenTK.rtGLResourceObject
         {
             base.DoCreateGLResource(aGL);
 
-            ID = GL.GenSampler();
+            if (ID == 0)
+                ID = GL.GenSampler();
             return;
         }
 
@@ -28,7 +29,8 @@ namespace rtOpenTK.rtGLResourceObject
         {
             base.DoDisposeGLResource(aGL);
 
-            GL.DeleteSampler(ID);
+            if (ID != 0)
+                GL.DeleteSampler(ID);
             return;
         }
     }

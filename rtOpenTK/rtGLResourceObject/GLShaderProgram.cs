@@ -44,14 +44,16 @@ namespace rtOpenTK.rtGLResourceObject
         protected override void DoCreateGLResource(TrtGLControl aGL)
         {
             base.DoCreateGLResource(aGL);
-            ID = GL.CreateProgram();
+            if (ID == 0)
+                ID = GL.CreateProgram();
             return;
         }
 
         protected override void DoDisposeGLResource(TrtGLControl aGL)
         {
             base.DoDisposeGLResource(aGL);
-            GL.DeleteProgram(ID);
+            if (ID != 0)
+                GL.DeleteProgram(ID);
             return;
         }
 

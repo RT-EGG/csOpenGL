@@ -12,22 +12,25 @@ namespace rtOpenTK.rtGLResourceObject
     {
         public TGLResourceObject()
         {
-            if (TrtGLControl.CurrentControl != null)
-                CreateGLResource(TrtGLControl.CurrentControl);
-            else
-                TrtGLControl.ResourceManager.EnqueueCreateResourceObject(this);
+            TrtGLControl.ResourceManager.EnqueueCreateResourceObject(this);
             return;
         }
 
         internal void CreateGLResource(TrtGLControl aGL)
         {
-            DoCreateGLResource(aGL);
+            CreateGLResourceNow(aGL);
             return;
         }
 
         internal void DisposeGLResource(TrtGLControl aGL)
         {
             DoDisposeGLResource(aGL);
+            return;
+        }
+
+        public void CreateGLResourceNow(TrtGLControl aGL)
+        {
+            DoCreateGLResource(aGL);
             return;
         }
 

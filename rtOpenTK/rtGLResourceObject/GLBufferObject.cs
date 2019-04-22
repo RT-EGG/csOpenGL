@@ -18,7 +18,8 @@ namespace rtOpenTK.rtGLResourceObject
         {
             base.DoCreateGLResource(aGL);
 
-            ID = OpenGL4.GL.GenBuffer();
+            if (ID == 0)
+                ID = OpenGL4.GL.GenBuffer();
             return;
         }
 
@@ -26,7 +27,8 @@ namespace rtOpenTK.rtGLResourceObject
         {
             base.DoDisposeGLResource(aGL);
 
-            OpenGL4.GL.DeleteBuffer(ID);
+            if (ID != 0)
+                OpenGL4.GL.DeleteBuffer(ID);
             return;
         }
 

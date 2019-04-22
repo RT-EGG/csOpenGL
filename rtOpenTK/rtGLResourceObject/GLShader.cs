@@ -39,13 +39,15 @@ namespace rtOpenTK.rtGLResourceObject
 
         protected override void DoCreateGLResource(TrtGLControl aGL)
         {
-            ID = GL.CreateShader(Type);
+            if (ID == 0)
+                ID = GL.CreateShader(Type);
             return;
         }
 
         protected override void DoDisposeGLResource(TrtGLControl aGL)
         {
-            GL.DeleteShader(ID);
+            if (ID != 0)
+                GL.DeleteShader(ID);
             ID = 0;
             return;
         }
