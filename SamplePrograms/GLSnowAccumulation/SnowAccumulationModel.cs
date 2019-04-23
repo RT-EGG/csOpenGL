@@ -121,7 +121,7 @@ namespace GLSnowAccumulation
 
         private void InitializeBuffers(TrtGLControl aGL, object aObject)
         {
-            const float con_MeshSize = 2.0f;
+            const float con_MeshSize = 1.0f;
             const float con_MeshHalfSize = con_MeshSize * 0.5f;
             float[] vertices = new float[(4 * 3) + (4 * 3) + (4 * 2)] {
                 -con_MeshHalfSize, +con_MeshHalfSize, 0.0f,
@@ -179,10 +179,10 @@ namespace GLSnowAccumulation
             p_TessEvacuateShader.CreateGLResource(aGL);
 
             bool compiled = true;
-            compiled &= p_VertexShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\Vertex.glsl"));
-            compiled &= p_FragmentShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\Fragment.glsl"));
-            compiled &= p_TessControlShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\TessControl.glsl"));
-            compiled &= p_TessEvacuateShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\TessEvacuate.glsl"));
+            compiled &= p_VertexShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\SnowAccumulation\\Vertex.glsl"));
+            compiled &= p_FragmentShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\SnowAccumulation\\Fragment.glsl"));
+            compiled &= p_TessControlShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\SnowAccumulation\\TessControl.glsl"));
+            compiled &= p_TessEvacuateShader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\SnowAccumulation\\TessEvacuate.glsl"));
 
             if (compiled) {
                 p_RenderShaderProgram.CreateGLResource(aGL);

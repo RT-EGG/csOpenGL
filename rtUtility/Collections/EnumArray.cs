@@ -15,7 +15,7 @@ namespace rtUtility.Collections
         new TValue this[TKey aKey] { get; set; }
     }
 
-    public class TEnumArray<TKey, TValue> : IEnumArray<TKey, TValue> where TKey : struct
+    public class TEnumArray<TKey, TValue> : IEnumArray<TKey, TValue> where TKey : System.Enum
     {
         public TEnumArray()
         {

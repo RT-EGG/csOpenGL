@@ -1,6 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// System
+using System;
+// OpenTK
 using OpenTK.Graphics.OpenGL4;
+// rtOpenTK
 using rtOpenTK;
 using rtOpenTK.rtGLResourceObject;
 
@@ -63,7 +65,7 @@ namespace GLSnowAccumulation
             p_Shader.CreateGLResource(aGL);
             p_ShaderProgram.CreateGLResource(aGL);
 
-            p_Shader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\HeightInitialization.glsl"));
+            p_Shader.Compile(aGL, TGLShaderTextSource.CreateFileSource("..\\resource\\shader\\SnowAccumulation\\HeightInitialization.glsl"));
             p_ShaderProgram.AttachShader(aGL, p_Shader);
             p_ShaderProgram.Link(aGL);
 
