@@ -10,5 +10,7 @@ namespace rtOpenTK
         { get; } = new TGLModelviewMatrixStack();
         public TGLProjectionMatrixStack ProjectionMatrix
         { get; } = new TGLProjectionMatrixStack();
+        public TGLAttribStack AttribStack
+        { get; } = new TGLAttribStack();
     }
 }
