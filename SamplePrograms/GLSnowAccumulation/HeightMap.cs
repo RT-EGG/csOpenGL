@@ -8,9 +8,9 @@ using rtOpenTK.rtGLResourceObject;
 
 namespace GLSnowAccumulation
 {
-    public class THeightTexture : TGLResourceObject
+    public class THeightMap : TGLResourceObject
     {
-        public THeightTexture(int aWidth, int aHeight)
+        public THeightMap(int aWidth, int aHeight)
             : base()
         {
             Width  = aWidth;
@@ -18,8 +18,21 @@ namespace GLSnowAccumulation
 
             return;
         }
+
+        public float MinHeight
+        { get; set; } = 0.0f;
+
+        public float MaxHeight
+        { get; set; } = 0.2f;
+
         public int TextureID
         { get; private set; }
+
+        public int Width
+        { get; private set; } = 0;
+
+        public int Height
+        { get; private set; } = 0;
 
         public void Randomize(TrtGLControl aGL)
         {
@@ -48,12 +61,6 @@ namespace GLSnowAccumulation
 
             return;
         }
-
-        public int Width
-        { get; private set; } = 0;
-
-        public int Height
-        { get; private set; } = 0;
 
         public override bool IsResourceReady
         { get { return TextureID != 0; } }

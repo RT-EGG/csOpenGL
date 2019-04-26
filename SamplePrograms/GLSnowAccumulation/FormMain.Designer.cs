@@ -27,7 +27,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.OpenGL = new rtOpenTK.TrtGLControl();
+            this.MainTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // OpenGL
@@ -41,6 +43,12 @@
             this.OpenGL.VSync = false;
             this.OpenGL.Load += new System.EventHandler(this.OpenGL_Load);
             this.OpenGL.Paint += new System.Windows.Forms.PaintEventHandler(this.OpenGL_Paint);
+            // 
+            // MainTimer
+            // 
+            this.MainTimer.Enabled = true;
+            this.MainTimer.Interval = 16;
+            this.MainTimer.Tick += new System.EventHandler(this.MainTimer_Tick);
             // 
             // FormMain
             // 
@@ -58,6 +66,7 @@
         #endregion
 
         private rtOpenTK.TrtGLControl OpenGL;
+        private System.Windows.Forms.Timer MainTimer;
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿// System
 using System;
 using System.Windows.Forms;
+using System.Diagnostics;
 // OpenTK
 using OpenTK.Graphics.OpenGL;
 // rtOpenTK
@@ -16,6 +17,7 @@ namespace GLSnowAccumulation
         public FormMain()
         {
             InitializeComponent();
+            p_SnowAccumulationModel.HeightMap = p_HeightMap;
 
             return;
         }
@@ -39,6 +41,11 @@ namespace GLSnowAccumulation
         {
             OpenGL.MakeCurrent();
 
+            float timestep = p_SimulationTimer.ElapsedMilliseconds * 0.001f;
+            p_SimulationTimer.Restart();
+
+            p_SnowfallParticles.Timestep(OpenGL, timestep);
+
             GL.ClearColor(0.2f, 0.5f, 0.7f, 1.0f);
             GL.ClearDepth(1.0);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -54,16 +61,22 @@ namespace GLSnowAccumulation
             status.ModelViewMatrix.View.LoadIdentity();
             status.ModelViewMatrix.View.LoadMatrix(p_CameraController.ViewMatrix);
 
-            status.ModelViewMatrix.Model.LoadIdentity();
+            status.ModelViewMatrix.Model.LoadIdentity();           
             status.ModelViewMatrix.Model.RotatePitch(-Math.PI * 0.5);
 
             GL.Enable(EnableCap.CullFace);
             GL.Enable(EnableCap.DepthTest);
             GL.DepthMask(true);
             GL.DepthFunc(DepthFunction.Lequal);
-            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            if (p_LineMesh)
+                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            else
+                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
 
             p_SnowAccumulationModel.Render(OpenGL, status);
+
+            status.ModelViewMatrix.Model.RotatePitch(Math.PI * 0.5);
+            p_SnowfallParticles.Render(OpenGL, status);
 
             OpenGL.SwapBuffers();
 
@@ -74,26 +87,43 @@ namespace GLSnowAccumulation
         {
             aElevationAngle = aElevationAngle.Clamp((-75.0).DegToRad(), (75.0).DegToRad());
 
-            OpenGL.Invalidate();
             return;
         }
-
-        private TSnowAccumulationModel p_SnowAccumulationModel = new TSnowAccumulationModel();
-        private TGLOrbitCameraController p_CameraController = new TGLOrbitCameraController();
 
         private void FormMain_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode) {
                 case Keys.F5:
                     p_SnowAccumulationModel.ReloadShader();
-                    OpenGL.Invalidate();
                     break;
                 case Keys.F4:
-                    p_SnowAccumulationModel.RandomizeHeight();
-                    OpenGL.Invalidate();
+                    TrtGLControl.EnqueueGLTask(RandomizeHeight, null);
+                    break;
+                case Keys.F3:
+                    p_LineMesh = !p_LineMesh;
                     break;
             }
             return;
         }
+
+        private void MainTimer_Tick(object sender, EventArgs e)
+        {
+            OpenGL.Invalidate();
+            return;
+        }
+
+        private void RandomizeHeight(TrtGLControl aGL, object aObject)
+        {
+            p_HeightMap.Randomize(aGL);
+            return;
+        }
+
+        private THeightMap p_HeightMap = new THeightMap(2048, 2048);
+        private TSnowAccumulationModel p_SnowAccumulationModel = new TSnowAccumulationModel();
+        private TSnowfallParticles p_SnowfallParticles = new TSnowfallParticles();
+        private TGLOrbitCameraController p_CameraController = new TGLOrbitCameraController();
+        private bool p_LineMesh = false;
+
+        private Stopwatch p_SimulationTimer = new Stopwatch();
     }
 }

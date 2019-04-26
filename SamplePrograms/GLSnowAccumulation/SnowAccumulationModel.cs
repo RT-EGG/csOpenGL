@@ -16,9 +16,9 @@ namespace GLSnowAccumulation
             p_LightInstance.Position.Set(10.0, 10.0, 10.0);
             p_LightInstance.Direction = (-p_LightInstance.Position).Normalized;
 
-            p_Material.Ambient.R = 0.0;
-            p_Material.Ambient.G = 0.0;
-            p_Material.Ambient.B = 0.2;
+            p_Material.Ambient.R = 0.2;
+            p_Material.Ambient.G = 0.2;
+            p_Material.Ambient.B = 0.35;
             p_Material.Diffuse.R = 1.0;
             p_Material.Diffuse.G = 1.0;
             p_Material.Diffuse.B = 1.0;
@@ -26,18 +26,6 @@ namespace GLSnowAccumulation
             TrtGLControl.EnqueueGLTask(InitializeBuffers, null);
             TrtGLControl.EnqueueGLTask(InitializeShaders, null);
 
-            return;
-        }
-
-        public float MinHeight
-        { get; set; } = 0.0f;
-
-        public float MaxHeight
-        { get; set; } = 0.2f;
-
-        public void RandomizeHeight()
-        {
-            p_HeightRandomize = true;
             return;
         }
 
@@ -51,11 +39,6 @@ namespace GLSnowAccumulation
         {
             if (!p_RenderShaderProgram.Linked)
                 return;
-
-            if (p_HeightRandomize) {
-                p_HeightMap.Randomize(aGL);
-                p_HeightRandomize = false;
-            }
 
             p_Material.UpdateBuffer(aGL);
             p_LightInstance.UpdateBuffer(aGL);
@@ -71,31 +54,25 @@ namespace GLSnowAccumulation
                 normal.Inverse();
                 normal.Tranpose();
 
-                TVector2H n = normal * (new TVector2H(0.0, 0.0, 1.0));
-
                 GL.ProgramUniform1(p_RenderShaderProgram.ID, 0, 64.0f);
                 GL.ProgramUniform1(p_RenderShaderProgram.ID, 1, 64.0f);
                 GL.ProgramUniformMatrix4(p_RenderShaderProgram.ID, 2, 1, false, aStatus.ProjectionMatrix.CurrentMatrix.FloatArray);
                 GL.ProgramUniformMatrix4(p_RenderShaderProgram.ID, 3, 1, false, aStatus.ModelViewMatrix.CurrentMatrix.FloatArray);
                 GL.ProgramUniformMatrix4(p_RenderShaderProgram.ID, 4, 1, false, aStatus.ModelViewMatrix.Model.CurrentMatrix.FloatArray);
                 GL.ProgramUniformMatrix3(p_RenderShaderProgram.ID, 5, 1, false, normal.FloatArray);
-                GL.ProgramUniform1(p_RenderShaderProgram.ID, 6, MinHeight);
-                GL.ProgramUniform1(p_RenderShaderProgram.ID, 7, MaxHeight);
+                GL.ProgramUniform1(p_RenderShaderProgram.ID, 6, (HeightMap == null) ? 0 : HeightMap.MinHeight);
+                GL.ProgramUniform1(p_RenderShaderProgram.ID, 7, (HeightMap == null) ? 0 : HeightMap.MaxHeight);
 
                 GL.BindBufferBase(BufferRangeTarget.UniformBuffer, GL.GetUniformBlockIndex(p_RenderShaderProgram.ID, "Material"), p_Material.BufferID);
                 GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 1, p_LightInstance.BufferID);
 
                 GL.ActiveTexture(TextureUnit.Texture0);
-                GL.BindTexture(TextureTarget.Texture2D, p_HeightMap.TextureID);
+                GL.BindTexture(TextureTarget.Texture2D, (HeightMap == null) ? 0 : HeightMap.TextureID);
                 GL.ActiveTexture(TextureUnit.Texture1);
                 GL.BindTexture(TextureTarget.Texture2D, p_Surface.TextureID);
                 GL.BindSampler(0, p_SamplerObject.ID);
                 GL.BindSampler(1, p_SamplerObject.ID);
                 GL.ProgramUniform2(p_RenderShaderProgram.ID, 8, p_Surface.Width, p_Surface.Height);
-                GL.ProgramUniform2(p_RenderShaderProgram.ID, 9, p_HeightMap.Width, p_HeightMap.Height);
-
-                byte[] buffer = new byte[1024 * 1024 * 4];
-                GL.GetTexImage(TextureTarget.Texture2D, 0, PixelFormat.Rgba, PixelType.UnsignedByte, buffer);
 
                 GL.EnableVertexAttribArray(0);
                 GL.EnableVertexAttribArray(1);
@@ -109,6 +86,9 @@ namespace GLSnowAccumulation
                 GL.DrawArrays(PrimitiveType.Patches, 0, 4);
 
             } finally {
+                GL.DisableVertexAttribArray(0);
+                GL.DisableVertexAttribArray(1);
+                GL.DisableVertexAttribArray(2);
                 GL.ActiveTexture(TextureUnit.Texture1);
                 GL.BindTexture(TextureTarget.Texture2D, 0);
                 GL.ActiveTexture(TextureUnit.Texture0);
@@ -198,6 +178,9 @@ namespace GLSnowAccumulation
             return;
         }
 
+        public THeightMap HeightMap
+        { get; set; } = null;
+
         private TGLBufferObject p_Vertices = new TGLBufferObject();
         private TGLShader p_VertexShader = new TGLShader.TGLVertexShader();
         private TGLShader p_FragmentShader = new TGLShader.TGLFragmentShader();
@@ -206,7 +189,6 @@ namespace GLSnowAccumulation
         private TGLShaderProgram p_RenderShaderProgram = new TGLShaderProgram();
 
         private TSurfaceTexture p_Surface = new TSurfaceTexture();
-        private THeightTexture p_HeightMap = new THeightTexture(2048, 2048);
         private bool p_HeightRandomize = false;
         private TGLSampler p_SamplerObject = new TGLSampler();
 

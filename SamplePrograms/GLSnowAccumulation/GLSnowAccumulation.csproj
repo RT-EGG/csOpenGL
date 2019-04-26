@@ -60,12 +60,13 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="HeightTexture.cs" />
+    <Compile Include="HeightMap.cs" />
     <Compile Include="LightInstance.cs" />
     <Compile Include="Material.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SnowAccumulationModel.cs" />
+    <Compile Include="SnowfallParticles.cs" />
     <Compile Include="SurfaceTexture.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
