@@ -104,18 +104,18 @@ namespace GLSnowAccumulation
             const float con_MeshSize = 1.0f;
             const float con_MeshHalfSize = con_MeshSize * 0.5f;
             float[] vertices = new float[(4 * 3) + (4 * 3) + (4 * 2)] {
-                -con_MeshHalfSize, +con_MeshHalfSize, 0.0f,
-                -con_MeshHalfSize, -con_MeshHalfSize, 0.0f,                
-                +con_MeshHalfSize, -con_MeshHalfSize, 0.0f,
-                +con_MeshHalfSize, +con_MeshHalfSize, 0.0f,
-                0.0f, 0.0f, 1.0f,
-                0.0f, 0.0f, 1.0f,
-                0.0f, 0.0f, 1.0f,
-                0.0f, 0.0f, 1.0f,
-                0.0f, 1.0f,
+                -con_MeshHalfSize, 0.0f, -con_MeshHalfSize, 
+                -con_MeshHalfSize, 0.0f, +con_MeshHalfSize, 
+                +con_MeshHalfSize, 0.0f, +con_MeshHalfSize, 
+                +con_MeshHalfSize, 0.0f, -con_MeshHalfSize, 
+                0.0f, 1.0f, 0.0f,
+                0.0f, 1.0f, 0.0f,
+                0.0f, 1.0f, 0.0f,
+                0.0f, 1.0f, 0.0f,
                 0.0f, 0.0f,
-                1.0f, 0.0f,
-                1.0f, 1.0f
+                0.0f, 1.0f,
+                1.0f, 1.0f,
+                1.0f, 0.0f
             };
 
             p_Vertices.CreateGLResource(aGL);

@@ -25,9 +25,6 @@ struct TLightInstance
     TLightMaterial Material;
 };
 
-//layout (binding = 0)  uniform sampler2D inHeightMap;
-layout (location = 9) uniform ivec2 inHeightMapSize;
-
 layout (std140) uniform Material
 {
     TMaterial FrontMaterial;
@@ -54,8 +51,6 @@ void main()
                       + (FrontMaterial.Diffuse * Lights[i].Material.Diffuse * diffusion);
     }
     outFragColor *= texture(inSurfaceTexture, inSurfaceTexCoord);
-    //outFragColor.x = inSurfaceTexCoord.x / 1024.0;
-    //outFragColor.y = inSurfaceTexCoord.y / 1024.0;
     outFragColor.w = 1.0;
     return;    
 }

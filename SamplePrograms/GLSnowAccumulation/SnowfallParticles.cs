@@ -21,7 +21,10 @@ namespace GLSnowAccumulation
         }
 
         public float GeneratePerSec
-        { get; set; } = 100.0f;
+        { get; set; } = 10.0f;
+
+        public THeightMap HeightMap
+        { get; set; } = null;
 
         public void AddParticle(TVector3 aPosition, float aRadius)
         {
@@ -101,14 +104,19 @@ namespace GLSnowAccumulation
             GL.UseProgram(p_TimestepComputeShaderProgram.ID);
             try {
                 GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 0, p_Buffer.ID);
+                GL.BindImageTexture(0, (HeightMap == null) ? 0 : HeightMap.TextureID, 0, false, 0, TextureAccess.ReadWrite, SizedInternalFormat.Rgba32f);
                 try {
                     GL.ProgramUniform1(p_TimestepComputeShaderProgram.ID, 0, p_PointCount);
                     GL.ProgramUniform1(p_TimestepComputeShaderProgram.ID, 1, aTime);
+                    GL.ProgramUniform1(p_TimestepComputeShaderProgram.ID, 2, (HeightMap == null) ? 0 : HeightMap.MinHeight);
+                    GL.ProgramUniform1(p_TimestepComputeShaderProgram.ID, 3, (HeightMap == null) ? 0 : HeightMap.MaxHeight);
+                    GL.ProgramUniform2(p_TimestepComputeShaderProgram.ID, 4, (HeightMap == null) ? 0 : HeightMap.Width, (HeightMap == null) ? 0 : HeightMap.Height);
 
                     GL.DispatchCompute(256, 256, 1);
-                    GL.MemoryBarrier(MemoryBarrierFlags.ShaderImageAccessBarrierBit);
+                    GL.MemoryBarrier(MemoryBarrierFlags.AllBarrierBits);
 
                 } finally {
+                    GL.BindImageTexture(0, 0, 0, false, 0, TextureAccess.ReadWrite, SizedInternalFormat.Rgba32f);
                     GL.BindBufferBase(BufferRangeTarget.ShaderStorageBuffer, 0, 0);
                 }
             } finally {
