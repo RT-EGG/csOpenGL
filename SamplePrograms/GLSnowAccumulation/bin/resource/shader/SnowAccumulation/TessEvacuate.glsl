@@ -9,7 +9,6 @@ layout (location = 4) uniform mat4 inModelMatrix;
 layout (location = 5) uniform mat3 inNormalMatrix;
 layout (location = 6) uniform float inMinHeight;
 layout (location = 7) uniform float inMaxHeight;
-layout (location = 8) uniform ivec2 inSurfaceTextureSize;
 
 in gl_PerVertex
 {
