@@ -9,7 +9,7 @@ layout (local_size_x = 32, local_size_y = 32, local_size_z = 1) in;
 
 float rand(vec2 co, float aSeed)
 {
-    return fract(sin(dot(co.xy ,vec2(12.9898,78.233)) * float(aSeed)) * 43758.5453);
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233)) * aSeed) * 43758.5453);
 }
 
 float rand(vec2 co)
