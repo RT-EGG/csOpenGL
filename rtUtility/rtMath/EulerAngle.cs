@@ -46,6 +46,22 @@ namespace rtUtility.rtMath
             return;
         }
 
+        public static IEulerAngle EstimateFrom(IROMatrix33 aMatrix)
+        {
+            return EstimateFrom(
+                TMatrix33.Multiply(aMatrix, new TVector3(0.0, 0.0, 1.0)),
+                TMatrix33.Multiply(aMatrix, new TVector3(0.0, 1.0, 0.0))
+                );
+        }
+
+        public static IEulerAngle EstimateFrom(IROMatrix44 aMatrix)
+        {
+            return EstimateFrom(
+                TMatrix44.Multiply(aMatrix, new TVector3H(0.0, 0.0, 1.0, 0.0)),
+                TMatrix44.Multiply(aMatrix, new TVector3H(0.0, 1.0, 0.0, 0.0))
+                );
+        }
+
         public static IEulerAngle EstimateFrom(IVector3 aZ, IVector3 aY)
         {
             TEulerAngle result = new TEulerAngle();

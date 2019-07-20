@@ -7,6 +7,7 @@ namespace rtUtility.rtMath
     {
         IROVector3H GetRow(int aRow);
         IROVector3H GetColumn(int aCol);
+        IROMatrix33 Extract33(int aRowIndex, int aColIndex);
     }
 
     public partial class TMatrix44 : TSquareMatrix, IROMatrix44
@@ -39,6 +40,21 @@ namespace rtUtility.rtMath
             this[aRow, 2] = aValue.Z;
             this[aRow, 3] = aValue.W;
             return;
+        }
+
+        public IROMatrix33 Extract33(int aRowIndex, int aColIndex)
+        {
+            if (!(aRowIndex.InRange(0, 1) && aColIndex.InRange(0, 1)))
+                throw new ArgumentOutOfRangeException("aRowIndex and aColIndex must be range in 0..1.");
+
+            TMatrix33 result = new TMatrix33();
+            for (int r = 0; r < 3; ++r) {
+                for (int c = 0; c < 3; ++c) {
+                    result[r, c] = this[r + aRowIndex, c + aColIndex];
+                }
+            }
+
+            return result;
         }
 
         public IROVector3H GetRow(int aRow)

@@ -144,13 +144,37 @@ namespace rtUtility.rtMath
 
         public static double RadToDeg(this double aRadian)
         {
-            const double con_RtD = 180.0 / Math.PI;
+            const double con_RtD = 180.0 / System.Math.PI;
+            return aRadian * con_RtD;
+        }
+
+        public static float RadToDeg(this float aRadian)
+        {
+            const float con_RtD = (float)(180.0 / System.Math.PI);
+            return aRadian * con_RtD;
+        }
+
+        public static decimal RadToDeg(this decimal aRadian)
+        {
+            const decimal con_RtD = (decimal)(180.0 / System.Math.PI);
             return aRadian * con_RtD;
         }
 
         public static double DegToRad(this double aDegree)
         {
-            const double con_DtR = Math.PI / 180.0;
+            const double con_DtR = System.Math.PI / 180.0;
+            return aDegree * con_DtR;
+        }
+
+        public static float DegToRad(this float aDegree)
+        {
+            const float con_DtR = (float)(System.Math.PI / 180.0);
+            return aDegree * con_DtR;
+        }
+
+        public static decimal DegToRad(this decimal aDegree)
+        {
+            const decimal con_DtR = (decimal)(System.Math.PI / 180.0);
             return aDegree * con_DtR;
         }
 

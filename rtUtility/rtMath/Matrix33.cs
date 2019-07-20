@@ -116,6 +116,36 @@ namespace rtUtility.rtMath
             }
             return result;
         }
+
+        public static TVector3 Multiply(IROMatrix33 aLeft, IROVector3 aRight)
+        {
+            TVector3 result = new TVector3();
+
+            Func<int, double> GetVecElem = (i) => {
+                switch (i) {
+                    case 0: return aRight.X;
+                    case 1: return aRight.Y;
+                    case 2: return aRight.Z;
+                }
+                return 0.0;
+            };
+            Action<int, double> SetVecElem = (i, value) => {
+                switch (i) {
+                    case 0: result.X = value; break;
+                    case 1: result.Y = value; break;
+                    case 2: result.Z = value; break;
+                }
+                return;
+            };
+
+            for (int i = 0; i < 3; ++i) {
+                double v = 0.0;
+                for (int k = 0; k < 3; ++k)
+                    v += aLeft[i, k] * GetVecElem(k);
+                SetVecElem(i, v);
+            }
+            return result;
+        }
     }
 
     // ModelviewMatrix part
