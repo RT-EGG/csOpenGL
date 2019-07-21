@@ -13,6 +13,8 @@ namespace rtUtility.rtControl
 {
     public partial class ColorPicker : UserControl
     {
+        public event Action<object> OnColorChange;
+
         public ColorPicker()
         {
             InitializeComponent();
@@ -31,29 +33,38 @@ namespace rtUtility.rtControl
             return;
         }
 
-        public TColorRGB RGB
+        public IROColorRGB RGB
         {
             set { HSV = value.ToHSV(); }
             get { return HSV.ToRGB(); }
+        }
 
+        public IROColorRGBA RGBA
+        {
+            set { RGB = value; UpDownA.Value = (decimal)value.A; }
+            get { return new TColorRGBA(RGB, (double)UpDownA.Value); }
         }
 
         public TColorHSV HSV
         {
             set
             {
-                H = value.H;
-                S = value.S;
-                V = value.V;
+                if (HSV != value) {
+                    H = value.H;
+                    S = value.S;
+                    V = value.V;
 
-                PanelHSPicker.Invalidate();
-                PanelVPicker.Invalidate();
+                    PanelHSPicker.Invalidate();
+                    PanelVPicker.Invalidate();
 
-                TColorRGB rgb = RGB;
-                PanelSampleViewPainter.BackColor = Color.FromArgb(255, rgb.Rb, rgb.Gb, rgb.Bb);
+                    IROColorRGB rgb = RGB;
+                    PanelSampleViewPainter.BackColor = Color.FromArgb(255, rgb.Rb, rgb.Gb, rgb.Bb);
 
-                UpdateRGBUpDown();
-                UpdateHSVUpDown();
+                    UpdateRGBUpDown();
+                    UpdateHSVUpDown();
+
+                    OnColorChange?.Invoke(this);
+                }
             }
             get
             {
@@ -149,9 +160,9 @@ namespace rtUtility.rtControl
             RectangleF result = new RectangleF();
             result.X = MARGIN;
             result.Y = MARGIN;
-            result.Width  = PanelVPicker.Width -  (MARGIN * 2.0f);
+            result.Width = PanelVPicker.Width - (MARGIN * 2.0f);
             result.Height = PanelVPicker.Height - (MARGIN * 2.0f);
-            
+
             return result;
         }
 
@@ -162,7 +173,7 @@ namespace rtUtility.rtControl
             RectangleF result = new RectangleF();
             result.X = MARGIN;
             result.Y = MARGIN;
-            result.Width  = PanelHSPicker.Width  - (MARGIN * 2.0f);
+            result.Width = PanelHSPicker.Width - (MARGIN * 2.0f);
             result.Height = PanelHSPicker.Height - (MARGIN * 2.0f);
 
             return result;
@@ -294,7 +305,7 @@ namespace rtUtility.rtControl
                 return;
 
             RectangleF rect = CalcVPickerRect();
-            HSV = new TColorHSV(H, S, 1.0 -((e.Y - rect.Top) / rect.Height).Clamp(0.0f, 1.0f));
+            HSV = new TColorHSV(H, S, 1.0 - ((e.Y - rect.Top) / rect.Height).Clamp(0.0f, 1.0f));
 
             UpdateRGBUpDown();
             UpdateHSVUpDown();
@@ -341,7 +352,7 @@ namespace rtUtility.rtControl
         {
             SetUpDownEventEnable(false);
             try {
-                TColorRGB rgb = RGB;
+                IROColorRGB rgb = RGB;
                 UpDownR.Value = (decimal)(rgb.R * 255.0);
                 UpDownG.Value = (decimal)(rgb.G * 255.0);
                 UpDownB.Value = (decimal)(rgb.B * 255.0);
@@ -412,6 +423,6 @@ namespace rtUtility.rtControl
         private Bitmap p_VImage = new Bitmap(64, 256);
         private bool p_VImageChange = true;
         private bool p_IsClickingHS = false;
-        private bool p_IsClickingV  = false;
+        private bool p_IsClickingV = false;
     }
 }

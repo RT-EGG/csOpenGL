@@ -32,39 +32,39 @@
             this.PanelNumericInput = new System.Windows.Forms.Panel();
             this.PanelAlpha = new System.Windows.Forms.Panel();
             this.LabelA = new System.Windows.Forms.Label();
-            this.upDownA = new rtUtility.rtControl.CustomNumericUpDown(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.UpDownB = new rtUtility.rtControl.CustomNumericUpDown(this.components);
             this.LabelB = new System.Windows.Forms.Label();
-            this.UpDownV = new rtUtility.rtControl.CustomNumericUpDown(this.components);
             this.LabelV = new System.Windows.Forms.Label();
-            this.UpDownR = new rtUtility.rtControl.CustomNumericUpDown(this.components);
             this.LabelR = new System.Windows.Forms.Label();
-            this.UpDownG = new rtUtility.rtControl.CustomNumericUpDown(this.components);
             this.LabelG = new System.Windows.Forms.Label();
-            this.UpDownH = new rtUtility.rtControl.CustomNumericUpDown(this.components);
             this.LabelH = new System.Windows.Forms.Label();
             this.LabelS = new System.Windows.Forms.Label();
-            this.UpDownS = new rtUtility.rtControl.CustomNumericUpDown(this.components);
             this.PanelSampleView = new System.Windows.Forms.Panel();
             this.PanelSampleViewPainter = new System.Windows.Forms.Panel();
             this.PanelRGB = new System.Windows.Forms.Panel();
             this.PanelHSV = new System.Windows.Forms.Panel();
+            this.UpDownA = new rtUtility.rtControl.CustomNumericUpDown(this.components);
+            this.UpDownB = new rtUtility.rtControl.CustomNumericUpDown(this.components);
+            this.UpDownV = new rtUtility.rtControl.CustomNumericUpDown(this.components);
+            this.UpDownR = new rtUtility.rtControl.CustomNumericUpDown(this.components);
+            this.UpDownG = new rtUtility.rtControl.CustomNumericUpDown(this.components);
+            this.UpDownH = new rtUtility.rtControl.CustomNumericUpDown(this.components);
+            this.UpDownS = new rtUtility.rtControl.CustomNumericUpDown(this.components);
             this.PanelPicker = new rtUtility.rtControl.DoubleBuffedPanel(this.components);
             this.PanelHSPicker = new rtUtility.rtControl.DoubleBuffedPanel(this.components);
             this.PanelVPicker = new rtUtility.rtControl.DoubleBuffedPanel(this.components);
             this.PanelDataView.SuspendLayout();
             this.PanelNumericInput.SuspendLayout();
             this.PanelAlpha.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.upDownA)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            this.PanelSampleView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.UpDownA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownS)).BeginInit();
-            this.PanelSampleView.SuspendLayout();
             this.PanelPicker.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,7 +94,7 @@
             // 
             this.PanelAlpha.AutoSize = true;
             this.PanelAlpha.Controls.Add(this.LabelA);
-            this.PanelAlpha.Controls.Add(this.upDownA);
+            this.PanelAlpha.Controls.Add(this.UpDownA);
             this.PanelAlpha.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.PanelAlpha.Location = new System.Drawing.Point(0, 77);
             this.PanelAlpha.Name = "PanelAlpha";
@@ -109,21 +109,6 @@
             this.LabelA.Size = new System.Drawing.Size(19, 12);
             this.LabelA.TabIndex = 9;
             this.LabelA.Text = "A :";
-            // 
-            // upDownA
-            // 
-            this.upDownA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.upDownA.Location = new System.Drawing.Point(31, 6);
-            this.upDownA.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.upDownA.Name = "upDownA";
-            this.upDownA.Size = new System.Drawing.Size(182, 19);
-            this.upDownA.TabIndex = 8;
-            this.upDownA.Tail = "";
             // 
             // tableLayoutPanel1
             // 
@@ -154,21 +139,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(216, 77);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // UpDownB
-            // 
-            this.UpDownB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpDownB.Location = new System.Drawing.Point(136, 53);
-            this.UpDownB.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.UpDownB.Name = "UpDownB";
-            this.UpDownB.Size = new System.Drawing.Size(77, 19);
-            this.UpDownB.TabIndex = 4;
-            this.UpDownB.Tail = "";
-            // 
             // LabelB
             // 
             this.LabelB.AutoSize = true;
@@ -179,21 +149,6 @@
             this.LabelB.TabIndex = 5;
             this.LabelB.Text = "B :";
             this.LabelB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // UpDownV
-            // 
-            this.UpDownV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpDownV.Location = new System.Drawing.Point(28, 53);
-            this.UpDownV.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.UpDownV.Name = "UpDownV";
-            this.UpDownV.Size = new System.Drawing.Size(77, 19);
-            this.UpDownV.TabIndex = 10;
-            this.UpDownV.Tail = "";
             // 
             // LabelV
             // 
@@ -206,21 +161,6 @@
             this.LabelV.Text = "V :";
             this.LabelV.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // UpDownR
-            // 
-            this.UpDownR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpDownR.Location = new System.Drawing.Point(136, 3);
-            this.UpDownR.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.UpDownR.Name = "UpDownR";
-            this.UpDownR.Size = new System.Drawing.Size(77, 19);
-            this.UpDownR.TabIndex = 11;
-            this.UpDownR.Tail = "";
-            // 
             // LabelR
             // 
             this.LabelR.AutoSize = true;
@@ -232,21 +172,6 @@
             this.LabelR.Text = "R :";
             this.LabelR.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // UpDownG
-            // 
-            this.UpDownG.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpDownG.Location = new System.Drawing.Point(136, 28);
-            this.UpDownG.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.UpDownG.Name = "UpDownG";
-            this.UpDownG.Size = new System.Drawing.Size(77, 19);
-            this.UpDownG.TabIndex = 2;
-            this.UpDownG.Tail = "";
-            // 
             // LabelG
             // 
             this.LabelG.AutoSize = true;
@@ -257,21 +182,6 @@
             this.LabelG.TabIndex = 3;
             this.LabelG.Text = "G :";
             this.LabelG.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // UpDownH
-            // 
-            this.UpDownH.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpDownH.Location = new System.Drawing.Point(28, 3);
-            this.UpDownH.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.UpDownH.Name = "UpDownH";
-            this.UpDownH.Size = new System.Drawing.Size(77, 19);
-            this.UpDownH.TabIndex = 9;
-            this.UpDownH.Tail = "";
             // 
             // LabelH
             // 
@@ -294,21 +204,6 @@
             this.LabelS.TabIndex = 12;
             this.LabelS.Text = "S :";
             this.LabelS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // UpDownS
-            // 
-            this.UpDownS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpDownS.Location = new System.Drawing.Point(28, 28);
-            this.UpDownS.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.UpDownS.Name = "UpDownS";
-            this.UpDownS.Size = new System.Drawing.Size(77, 19);
-            this.UpDownS.TabIndex = 13;
-            this.UpDownS.Tail = "";
             // 
             // PanelSampleView
             // 
@@ -345,6 +240,111 @@
             this.PanelHSV.Name = "PanelHSV";
             this.PanelHSV.Size = new System.Drawing.Size(289, 0);
             this.PanelHSV.TabIndex = 2;
+            // 
+            // UpDownA
+            // 
+            this.UpDownA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpDownA.Location = new System.Drawing.Point(31, 6);
+            this.UpDownA.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.UpDownA.Name = "UpDownA";
+            this.UpDownA.Size = new System.Drawing.Size(182, 19);
+            this.UpDownA.TabIndex = 8;
+            this.UpDownA.Tail = "";
+            // 
+            // UpDownB
+            // 
+            this.UpDownB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpDownB.Location = new System.Drawing.Point(136, 53);
+            this.UpDownB.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.UpDownB.Name = "UpDownB";
+            this.UpDownB.Size = new System.Drawing.Size(77, 19);
+            this.UpDownB.TabIndex = 4;
+            this.UpDownB.Tail = "";
+            // 
+            // UpDownV
+            // 
+            this.UpDownV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpDownV.Location = new System.Drawing.Point(28, 53);
+            this.UpDownV.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.UpDownV.Name = "UpDownV";
+            this.UpDownV.Size = new System.Drawing.Size(77, 19);
+            this.UpDownV.TabIndex = 10;
+            this.UpDownV.Tail = "";
+            // 
+            // UpDownR
+            // 
+            this.UpDownR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpDownR.Location = new System.Drawing.Point(136, 3);
+            this.UpDownR.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.UpDownR.Name = "UpDownR";
+            this.UpDownR.Size = new System.Drawing.Size(77, 19);
+            this.UpDownR.TabIndex = 11;
+            this.UpDownR.Tail = "";
+            // 
+            // UpDownG
+            // 
+            this.UpDownG.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpDownG.Location = new System.Drawing.Point(136, 28);
+            this.UpDownG.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.UpDownG.Name = "UpDownG";
+            this.UpDownG.Size = new System.Drawing.Size(77, 19);
+            this.UpDownG.TabIndex = 2;
+            this.UpDownG.Tail = "";
+            // 
+            // UpDownH
+            // 
+            this.UpDownH.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpDownH.Location = new System.Drawing.Point(28, 3);
+            this.UpDownH.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.UpDownH.Name = "UpDownH";
+            this.UpDownH.Size = new System.Drawing.Size(77, 19);
+            this.UpDownH.TabIndex = 9;
+            this.UpDownH.Tail = "";
+            // 
+            // UpDownS
+            // 
+            this.UpDownS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpDownS.Location = new System.Drawing.Point(28, 28);
+            this.UpDownS.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.UpDownS.Name = "UpDownS";
+            this.UpDownS.Size = new System.Drawing.Size(77, 19);
+            this.UpDownS.TabIndex = 13;
+            this.UpDownS.Tail = "";
             // 
             // PanelPicker
             // 
@@ -401,16 +401,16 @@
             this.PanelNumericInput.PerformLayout();
             this.PanelAlpha.ResumeLayout(false);
             this.PanelAlpha.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.upDownA)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.PanelSampleView.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.UpDownA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpDownS)).EndInit();
-            this.PanelSampleView.ResumeLayout(false);
             this.PanelPicker.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -434,7 +434,7 @@
         private CustomNumericUpDown UpDownV;
         private System.Windows.Forms.Panel PanelAlpha;
         private System.Windows.Forms.Label LabelA;
-        private CustomNumericUpDown upDownA;
+        private CustomNumericUpDown UpDownA;
         private System.Windows.Forms.Panel PanelNumericInput;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private CustomNumericUpDown UpDownR;
