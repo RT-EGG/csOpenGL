@@ -1,6 +1,6 @@
-﻿namespace rtUtility.Control
+﻿namespace rtUtility.rtControl
 {
-    partial class CustomNumericUpDown
+    partial class DoubleBuffedPanel
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -10,7 +10,7 @@
         /// <summary> 
         /// 使用中のリソースをすべてクリーンアップします。
         /// </summary>
-        /// <param name="disposing">マネージド リソースを破棄する場合は true を指定し、その他の場合は false を指定します。</param>
+        /// <param name="disposing">マネージ リソースを破棄する場合は true を指定し、その他の場合は false を指定します。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null)) {
@@ -27,7 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-
+            components = new System.ComponentModel.Container();
         }
 
         #endregion

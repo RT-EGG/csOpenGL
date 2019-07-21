@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace rtUtility.Control
+namespace rtUtility.rtControl
 {
     public partial class CustomNumericUpDown : NumericUpDown
     {
