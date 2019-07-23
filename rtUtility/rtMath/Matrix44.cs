@@ -444,10 +444,8 @@ namespace rtUtility.rtMath
 
         public void MakePerspective(double aFovY, double aAspect, double aNear, double aFar)
         {
-            double fovY_2 = (aFovY * 0.5) * (Math.PI / 180.0);
-            double fovX_2 = fovY_2 * aAspect;
-            double tx = Math.Tan(fovX_2) * aNear;
-            double ty = Math.Tan(fovY_2) * aNear;
+            double ty = Math.Tan((aFovY * 0.5) * (Math.PI / 180.0));
+            double tx = ty * aAspect;
 
             MakeFrustum(-tx, tx, -ty, ty, aNear, aFar);
             return;
