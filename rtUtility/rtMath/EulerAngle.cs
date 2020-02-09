@@ -46,6 +46,11 @@ namespace rtUtility.rtMath
             return;
         }
 
+        public static TEulerAngle CreateFromDegree(double aYawDeg, double aPitchDeg, double aRollDeg)
+        {
+            return new TEulerAngle(aYawDeg.DegToRad(), aPitchDeg.DegToRad(), aRollDeg.DegToRad());
+        }
+
         public static IEulerAngle EstimateFrom(IROMatrix33 aMatrix)
         {
             return EstimateFrom(
