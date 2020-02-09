@@ -45,13 +45,13 @@ namespace GLSnowAccumulation
             if (!p_RenderShaderProgram.Linked)
                 return;
 
-            aStatus.AttribStack.EnableBit.Push();
+            aStatus.AttribStack.EnableGroup.Push();
             try {
                 GL.UseProgram(p_RenderShaderProgram.ID);
                 try {
-                    aStatus.AttribStack.EnableBit.Enable(EnableCap.PointSprite);
-                    aStatus.AttribStack.EnableBit.Enable(EnableCap.VertexProgramPointSize);
-                    aStatus.AttribStack.EnableBit.Enable(EnableCap.Blend);
+                    aStatus.AttribStack.EnableGroup.Enable(EnableCap.PointSprite);
+                    aStatus.AttribStack.EnableGroup.Enable(EnableCap.VertexProgramPointSize);
+                    aStatus.AttribStack.EnableGroup.Enable(EnableCap.Blend);
                     GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
                     GL.ProgramUniformMatrix4(p_RenderShaderProgram.ID, 0, 1, false, aStatus.ProjectionMatrix.CurrentMatrix.FloatArray);
@@ -75,7 +75,7 @@ namespace GLSnowAccumulation
                     GL.UseProgram(0);
                 }
             } finally {
-                aStatus.AttribStack.EnableBit.Pop();
+                aStatus.AttribStack.EnableGroup.Pop();
             }
 
             return;

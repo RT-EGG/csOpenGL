@@ -34,7 +34,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.TrackbarTimestepScale = new System.Windows.Forms.TrackBar();
             this.OpenGL = new rtOpenTK.TrtGLControl();
-            this.UpDownTimestepScale = new rtUtility.Control.CustomNumericUpDown(this.components);
+            this.UpDownTimestepScale = new rtUtility.rtControl.CustomNumericUpDown(this.components);
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackbarTimestepScale)).BeginInit();
@@ -160,7 +160,7 @@
         private System.Windows.Forms.Label LabelTimestepScale;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TrackBar TrackbarTimestepScale;
-        private rtUtility.Control.CustomNumericUpDown UpDownTimestepScale;
+        private rtUtility.rtControl.CustomNumericUpDown UpDownTimestepScale;
     }
 }
 
