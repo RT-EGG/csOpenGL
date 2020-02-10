@@ -9,45 +9,67 @@ namespace MathUnitTest
     public class EulerAngleEstimationTest
     {
         [TestMethod]
-        public void TestMain()
+        public void TestSpecifyCases()
         {
-            foreach (var angle in GetTestCases()) {
-                Verify(angle);
+            foreach (var @case in EnumerateSpecifyTestCases()) {
+                Verify(@case);
             }
             return;
         }
 
-        public void Verify(IROEulerAngle inAngle)
+        [TestMethod]
+        public void TestRandomCases()
         {
-            TMatrix44 rotmat = TMatrix44.MakeRotateMatrixYaw(inAngle.YawRad)
-                             * TMatrix44.MakeRotateMatrixPitch(inAngle.PitchRad)
-                             * TMatrix44.MakeRotateMatrixRoll(inAngle.RollRad);
+            Random randomizer = new Random();
+            for (int i = 0; i < RandomCasesCount; ++i) {
+                Verify(GenerateRandomAngle(randomizer));
+            }
+            return;
+        }
 
-            IROEulerAngle estimated = TEulerAngle.EstimateFrom(rotmat);
+        private void Verify(IROEulerAngle inValue)
+        {
+            TMatrix44 expected = TMatrix44.MakeRotateMatrixYaw(inValue.YawRad)
+                               * TMatrix44.MakeRotateMatrixPitch(inValue.PitchRad)
+                               * TMatrix44.MakeRotateMatrixRoll(inValue.RollRad);
+
+            IROEulerAngle estimated = TEulerAngle.EstimateFrom(expected);
             TMatrix44 actual = TMatrix44.MakeRotateMatrixYaw(estimated.YawRad)
                              * TMatrix44.MakeRotateMatrixPitch(estimated.PitchRad)
                              * TMatrix44.MakeRotateMatrixRoll(estimated.RollRad);
 
-            Assert.AreEqual(rotmat, actual, $"Yaw = { inAngle.YawDeg }, Pitch = { inAngle.PitchDeg }, Roll = { inAngle.RollDeg }", new object[] { inAngle.YawDeg, inAngle.PitchDeg, inAngle.RollDeg });
+            if (!expected.Equals(actual)) {
+                Assert.Fail($"Y={ inValue.YawDeg }; X={ inValue.PitchDeg }; Z={ inValue.RollDeg }");
+            }
             return;
         }
 
-        private IEnumerable<IROEulerAngle> GetTestCases()
+        private IROEulerAngle GenerateRandomAngle(Random inGenerator)
+        {
+            return new TEulerAngle(inGenerator.NextDouble() * 360.0 - 180.0,
+                                   inGenerator.NextDouble() * 360.0 - 180.0,
+                                   inGenerator.NextDouble() * 360.0 - 180.0);
+        }
+
+        private IEnumerable<IROEulerAngle> EnumerateSpecifyTestCases()
         {
             IList<IROEulerAngle> result = new List<IROEulerAngle>();
-            result.Add(TEulerAngle.CreateFromDegree(180.0, 0.0, 0.0));
-            result.Add(TEulerAngle.CreateFromDegree(0.0, 180.0, 0.0));
-            result.Add(TEulerAngle.CreateFromDegree(0.0, 0.0, 180.0));
-            result.Add(TEulerAngle.CreateFromDegree(0.0, 90.0, 180.0));
-            result.Add(TEulerAngle.CreateFromDegree(0.0, -90.0, 180.0));
-            result.Add(TEulerAngle.CreateFromDegree(90.0, 0.0, 90.0));
-            result.Add(TEulerAngle.CreateFromDegree(0.0, 90.0, 90.0));
-            result.Add(TEulerAngle.CreateFromDegree(0.0, 90.0, -90.0));
-            result.Add(TEulerAngle.CreateFromDegree(0.0, -90.0, -90.0));
-            result.Add(TEulerAngle.CreateFromDegree(0.0, -90.0, -90.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, 0.0, 0.0));
+            result.Add(TEulerAngle.FromDegrees(180.0, 0.0, 0.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, 180.0, 0.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, 0.0, 180.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, 90.0, 0.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, -90.0, 0.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, 90.0, 180.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, -90.0, -180.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, 90.0, 90.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, 90.0, -90.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, -90.0, 90.0));
+            result.Add(TEulerAngle.FromDegrees(0.0, -90.0, -90.0));
 
             return result;
         }
-        private const int RandomCaseCount = 10;
+
+        private const int RandomCasesCount = 1000;
     }
 }

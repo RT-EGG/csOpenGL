@@ -69,6 +69,10 @@ namespace rtUtility.rtMath
 
         public static IEulerAngle EstimateFrom(IVector3 aZ, IVector3 aY)
         {
+            Func<double, bool> AlmostEqualsPi = (double inValue) => {
+                return inValue.AlmostEqual(Math.PI) || inValue.AlmostEqual(-Math.PI);
+            };
+
             TEulerAngle result = new TEulerAngle();
 
             TVector3 z = new TVector3(aZ);
@@ -78,36 +82,38 @@ namespace rtUtility.rtMath
                 return result; // zero vector
 
             // z to pitch
-            result.PitchRad = Math.Asin(-z.Y);
+            result.PitchRad = System.Math.Asin(-z.Y);
             // z to yaw
             if (z.Z.IsZero()) {
-                if (z.X.IsZero()) {
-                    result.YawRad = Math.Atan2(y.X, y.Z);
-                    if (z.Y > 0.0)
-                        result.YawRad += Math.PI;
-                } else {
+                if (z.X.IsZero())
+                    result.YawRad = 0.0;
+                else if (z.X > 0.0)
                     result.YawRad = Math.PI * 0.5;
-                    if (z.X < 0.0)
-                        result.YawRad *= -1.0;
-                }
+                else
+                    result.YawRad = -Math.PI * 0.5;
+
             } else {
-                result.YawRad = Math.Atan2(z.X, z.Z);
+                result.YawRad = System.Math.Atan2(z.X, z.Z);
             }
             result.YawRad = result.YawRad.Modulate(-Math.PI, Math.PI);
 
             // y to roll
-            if (!y.Y.IsZero()) { // not polar direction
-                TVector3 y2 = TMatrix44.MakeRotateMatrixPitch(result.PitchRad) * TMatrix44.MakeRotateMatrixYaw(result.YawRad) * (new TVector3H(0.0, 1.0, 0.0, 0.0));
-                result.RollRad = Math.Acos(TVector.DotProduct(y, y2).Clamp(-1.0, 1.0));
+            TVector3 y2 = TMatrix44.MakeRotateMatrixYaw(result.YawRad) * TMatrix44.MakeRotateMatrixPitch(result.PitchRad) * (new TVector3H(0.0, 1.0, 0.0, 0.0));
+            result.RollRad = System.Math.Acos(rtUtility.rtMath.TMathExtension.Clamp<double>(TVector.DotProduct(y, y2), -1.0, 1.0));
 
-                if (z.Z.IsZero()) {
-                    if ((z.X > 0.0) == (TVector3.CrossProduct(y, y2).X > 0.0))
+            if (z.Z.IsZero()) {
+                if (z.X.IsZero()) {
+                    if (y.X > 0.0)
                         result.RollRad *= -1.0;
                 } else {
-                    if (result.YawRad.InRange(-Math.PI * 0.5, Math.PI * 0.5) == (TVector3.CrossProduct(y, y2).Z > 0.0))
+                    if ((z.X > 0.0) == (TVector3.CrossProduct(y, y2).X > 0.0))
                         result.RollRad *= -1.0;
                 }
+            } else {
+                if (result.YawRad.InRange(-Math.PI * 0.5, Math.PI * 0.5) == (TVector3.CrossProduct(y, y2).Z > 0.0))
+                    result.RollRad *= -1.0;
             }
+
             result.RollRad = result.RollRad.Modulate(-Math.PI, Math.PI);
 
             return result;
