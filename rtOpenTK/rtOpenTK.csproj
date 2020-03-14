@@ -102,6 +102,8 @@
       <DependentUpon>rtGLControl.cs</DependentUpon>
     </Compile>
     <Compile Include="rtGLResourceObject\GLBufferObject.cs" />
+    <Compile Include="rtGLResourceObject\GLFrameBufferObject.cs" />
+    <Compile Include="rtGLResourceObject\GLRenderBufferObject.cs" />
     <Compile Include="rtGLResourceObject\GLResourceManager.cs" />
     <Compile Include="rtGLResourceObject\GLResourceObject.cs" />
     <Compile Include="rtGLResourceObject\GLSampler.cs" />
