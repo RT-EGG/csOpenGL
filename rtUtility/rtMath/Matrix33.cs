@@ -25,6 +25,15 @@ namespace rtUtility.rtMath
             return;
         }
 
+        public static TMatrix33 IdentifyMatrix
+        {
+            get {
+                TMatrix33 result = new TMatrix33();
+                result.MakeIdentity();
+                return result;
+            }
+        }
+
         #region operator
         public static TMatrix33 operator -(TMatrix33 aValue)
         {

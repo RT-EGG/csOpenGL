@@ -8,7 +8,7 @@ namespace rtOpenTK
 {
     public interface IROGLViewport
     {
-        void Adapt(GLControl aDst);
+        void Adapt();
 
         int X { get; }
         int Y { get; }
@@ -29,7 +29,7 @@ namespace rtOpenTK
 
     public class TGLViewport : IGLViewport
     {
-        public void Adapt(GLControl aDst)
+        public void Adapt()
         {
             GL.Viewport(X, Y, Width, Height);
             return;
