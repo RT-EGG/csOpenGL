@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="Exception.cs" />
     <Compile Include="GLAttribStack.cs" />
+    <Compile Include="GLMaterial.cs" />
     <Compile Include="GLMatrixStack.cs" />
     <Compile Include="GLModelMatrixStack.cs" />
     <Compile Include="GLModelviewMatrixStack.cs" />
