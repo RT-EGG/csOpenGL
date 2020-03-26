@@ -114,6 +114,7 @@
     <Compile Include="rtGLResourceObject\GLShaderSource.cs" />
     <Compile Include="rtGLResourceObject\GLShaderTextSource.cs" />
     <Compile Include="rtGLResourceObject\GLTexture.cs" />
+    <Compile Include="rtGLResourceObject\GLVertexArrayObject.cs" />
     <Compile Include="rtGLUtility\rtGLCameraController\GLCameraController.cs" />
     <Compile Include="rtGLUtility\rtGLCameraController\GLOrbitCameraController.cs" />
   </ItemGroup>
