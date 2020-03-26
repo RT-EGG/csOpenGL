@@ -8,7 +8,7 @@ namespace rtOpenTK
     {
         public void Bind()
         {
-            if ((Shader == null) || (!Shader.Compiled)) {
+            if ((Shader == null) || (!Shader.Linked)) {
                 return;
             }
             
@@ -23,7 +23,7 @@ namespace rtOpenTK
             return;
         }
 
-        public TGLShader Shader
+        public TGLShaderProgram Shader
         {
             get => m_Shader;
             set {
@@ -116,7 +116,7 @@ namespace rtOpenTK
             return;　
         }
         
-        private TGLShader m_Shader = null;
+        private TGLShaderProgram m_Shader = null;
         private IReadOnlyDictionary<string, IShaderAttributes> Attributes
         { get; set; } = null;
         private IReadOnlyDictionary<string, IShaderUniformVariable> UniformVariables
@@ -140,12 +140,12 @@ namespace rtOpenTK
 
         private class TShaderAttributes : IShaderAttributes
         {
-            public TShaderAttributes(TGLShader inShader, int inIndex)
+            public TShaderAttributes(TGLShaderProgram inShader, int inIndex)
             {
                 GL.GetActiveAttrib(inShader.ID, inIndex, 128, out int length, out int size, out ActiveAttribType type, out string name);
 
                 Name = name;
-                Index = inIndex;
+                Index = GL.GetAttribLocation(inShader.ID, name);
                 Size = size;
                 Type = type;
                 return;
@@ -163,12 +163,12 @@ namespace rtOpenTK
 
         private class TShaderUniformVariable : IShaderUniformVariable
         {
-            public TShaderUniformVariable(TGLShader inShader, int inIndex)
+            public TShaderUniformVariable(TGLShaderProgram inShader, int inIndex)
             {
                 GL.GetActiveUniform(inShader.ID, inIndex, 128, out int length, out int size, out ActiveUniformType type, out string name);
 
                 Name = name;
-                Index = inIndex;
+                Index = GL.GetUniformLocation(inShader.ID, name);
                 Size = size;
                 Type = type;
                 return;
