@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
 using System.Drawing;
 // OpenTK
 using OpenTK;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics;
 // rtOpenTK
 using rtOpenTK.rtGLResourceObject;
 
@@ -18,6 +17,9 @@ namespace rtOpenTK
         public TrtGLControl()
         {
             InitializeComponent();
+            if (GraphicsContext == null) {
+                GraphicsContext = this.Context;
+            }
         }
 
         public new void MakeCurrent()
@@ -25,6 +27,8 @@ namespace rtOpenTK
             p_CurrentControl = this;
             base.MakeCurrent();
             ResourceManager.Process(this);
+
+            GraphicsContext.MakeCurrent(this.WindowInfo);
             return;
         }
 
@@ -80,5 +84,6 @@ namespace rtOpenTK
         }
         
         private static TrtGLControl p_CurrentControl = null;
+        private static IGraphicsContext GraphicsContext = null;
     }
 }
